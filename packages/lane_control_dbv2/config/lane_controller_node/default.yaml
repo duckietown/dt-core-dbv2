@@ -1,0 +1,30 @@
+#lane_control/lane_controller_node
+# <<<<<<< HEAD
+#v_bar_old 0.45
+v_bar: 0.23
+# k_d_old: -12
+k_d: -0.3
+# k_theta_old: -6.0
+k_theta: -0.2
+k_Id: 0.3
+# =======
+# v_bar: 0.2
+# k_d: -7
+# k_theta: -2
+# k_Id: 0.5
+# >>>>>>> origin/devel-intersection_navigation-final-report
+k_Iphi: 0.05
+k_Dd: 0.0
+k_Dphi: 0.0
+theta_thres: 0.523
+d_thres: 0.2615
+d_offset: 0.0
+q_u: [10000., 0, 0,
+      0, 2., 0,
+      0, 0, 20000.]
+Norm: [0.00005, 0, 0,
+       0, 0.00005, 0,
+       0, 0, 0.00005]
+r:
+- 100.
+lqr_gain: 1.0
