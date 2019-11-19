@@ -5,7 +5,6 @@ project(lane_control_dbv2)
 find_package(catkin REQUIRED COMPONENTS
   duckietown_msgs
   geometry_msgs
-  roscpp
   rospy
   std_msgs
 )
