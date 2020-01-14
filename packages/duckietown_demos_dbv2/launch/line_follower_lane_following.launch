@@ -16,7 +16,7 @@
 		<arg name="ai_trafo_mode" value="$(arg ai_trafo_mode)"/>
 		<arg name="ai_interval" value="$(arg ai_interval)"/>
 		<arg name="/lane_following/stop_line_filter" default="false" /> <!-- will not every allow a transition into COORDINATION mode -->
-		<arg name="/lane_following/lane_controller_launch_file" default="$(find lane_control_dbv2)/launch/lane_controller_node.launch" />
+		<arg name="/lane_following/lane_controller_launch_file" default="$(find line_follower_lane_controller)/launch/line_follower_lane_controller.launch" />
 		<arg name="vehicle_avoidance" default="false"/>
 	</include>
 </launch>

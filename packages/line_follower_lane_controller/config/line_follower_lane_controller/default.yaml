@@ -1,0 +1,11 @@
+
+steering_gain: 1.0
+k_I: 0.0
+max_I: 1.0
+I_decay: 1.0
+update_hz: 10.0
+
+outer_right_threshold: 0.5
+inner_right_threshold: 0.5
+inner_left_threshold: 0.8
+outer_left_threshold: 0.8
