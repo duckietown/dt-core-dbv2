@@ -45,6 +45,11 @@
 <arg name="/lane_following/stop_line_filter" default="true"/>
 <arg name="/lane_following/lane_controller" default="true"/>
 
+<!-- This argument provides a way to implement a different lane controller and drop it in as a replacement.
+     To do so, simply remap your new lane controller's car_cmd topic to `/lane_controller_node/car_cmd`, and
+     set this arg. See the demo launchfile line_follower_lane_following.launch for an example of this. -->
+<arg name="/lane_following/lane_controller_launch_file" default="$(find lane_control)/launch/lane_controller_node.launch" />
+
 <arg name="fsm" default="true"/>
 
 <arg name="obstacle_avoidance_and_detection" default="false"/>
@@ -61,6 +66,7 @@
 <arg name="/vehicle_avoidance/multivehicle_detection" default="false" />
 <arg name="/vehicle_avoidance/filter" default="true" />
 <arg name="/vehicle_avoidance/control" default="true"/>
+<arg name="/vehicle_avoidance/vehicle_detection_node_launchfile" default="$(find vehicle_detection)/launch/vehicle_detection_node.launch" />
 
 <arg name="apriltags" default="false"/>
 
@@ -283,12 +289,10 @@
 		<remap from="lane_controller_node/stop_line_reading" to="stop_line_filter_node/stop_line_reading" />
 		<remap from="wheels_driver_node/radius_limit" to="lane_controller_node/radius_limit" />
 
-
-
-
-		<include file="$(find lane_control_dbv2)/launch/lane_controller_node.launch">
+		<include file="$(arg /lane_following/lane_controller_launch_file)">
 			<arg name="veh" value="$(arg veh)"/>
 			<arg name="param_file_name" value="$(arg param_file_name)"/>
+			<arg name="topic_name" value="lane_controller_node/car_cmd"/>
 		</include>
 	</group>
 
@@ -352,7 +356,7 @@
 	<!-- Vehicle Detection Node -->
 	<remap from="vehicle_detection_node/image" to="camera_node/image/compressed" />
 	<group if="$(arg /vehicle_avoidance/detection)">
-		<include file="$(find vehicle_detection)/launch/vehicle_detection_node.launch">
+		<include file="$(arg /vehicle_avoidance/vehicle_detection_node_launchfile)">
 			<arg name="veh" value="$(arg veh)"/>
 		</include>
 	</group>

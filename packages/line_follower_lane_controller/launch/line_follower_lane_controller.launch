@@ -1,0 +1,19 @@
+<launch>
+	<arg name="veh"/>
+	<arg name="param_file_name" default="default" doc="Specify a param file. ex:megaman"/>
+	<arg name="param_file_name_wheels_driver_node" default="default" doc="Specify a param file. ex:megaman"/>
+	<arg name="pkg_name" default="line_follower_lane_controller" doc="name of the package"/>
+	<arg name="node_name" default="line_follower_lane_controller" doc="name of the node"/>
+	<arg name="topic_name" default="lane_controller_node/car_cmd"/>
+
+    <group ns="$(arg veh)">
+        <!-- The master launch file expects the lane control car_cmd to be published to the topic '/lane_controller_node/car/cmd'.
+             This remap is so that this lane controller can be a drop-in replacement for the original lane controller. -->
+        <remap from="$(arg node_name)/car_cmd" to="lane_controller_node/car_cmd"/>
+	    <node  pkg="$(arg pkg_name)" type="$(arg node_name).py" name="$(arg node_name)" output="screen" required="true">
+	        <rosparam command="load" file="$(find line_follower_lane_controller)/config/$(arg node_name)/$(arg param_file_name).yaml"/>
+            <remap from="$(arg node_name)/car_cmd" to="$(arg topic_name)"/>
+	    </node>
+	</group>
+
+</launch>

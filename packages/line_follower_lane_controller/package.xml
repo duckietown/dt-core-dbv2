@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>line_follower_lane_controller</name>
+  <version>1.0.0</version>
+  <description>Follows a lane using only the DBV2 line following sensors.</description>
+
+  <author email="scottti@student.ethz.ch">Timothy Scott</author>
+  <maintainer email='scottti@student.ethz.ch'>Timothy Scott</maintainer>
+
+  <license>GPLv3</license>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>duckietown_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+
+</package>
