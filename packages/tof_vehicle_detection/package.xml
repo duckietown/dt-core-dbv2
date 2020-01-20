@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>tof_vehicle_detection</name>
+  <version>1.0.0</version>
+  <description>Detect vehicles in front of us using the DBV2 time-of-flight sensors.</description>
+
+  <maintainer email="scottti@student.ethz.ch">Timothy Scott</maintainer>
+  <author email="scottti@student.ethz.ch">Timothy Scott</author>
+
+  <license>GPLv3</license>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>duckietown_msgs</depend>
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
+
+</package>
