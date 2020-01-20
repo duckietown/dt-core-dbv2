@@ -77,8 +77,8 @@ class LineFollowerLaneController(DTROS):
 
         omega = self.parameters['~steering_gain'] * current_state + self.parameters['~k_I'] * self.integral
 
-        self.log("State: {}, Integral: {}, Omega: {}, Raw measurements: ({}, {})".format(
-            current_state, self.integral, omega, msg.inner_right, msg.outer_right))
+        # self.log("State: {}, Integral: {}, Omega: {}, Raw measurements: ({}, {})".format(
+        #     current_state, self.integral, omega, msg.inner_right, msg.outer_right))
 
         car_cmd = Twist2DStamped()
         car_cmd.header.stamp = rospy.get_rostime()
