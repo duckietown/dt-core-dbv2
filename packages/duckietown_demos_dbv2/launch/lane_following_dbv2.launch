@@ -25,14 +25,18 @@
 
 		<arg if="$(arg line_follower)" name="/lane_following/lane_controller_launch_file"
              value="$(find line_follower_lane_controller)/launch/line_follower_lane_controller.launch"/>
-
         <arg unless="$(arg line_follower)" name="/lane_following/lane_controller_launch_file"
              value="$(find lane_control_dbv2)/launch/lane_controller_node.launch"/>
 
-        <arg if="$(arg tof)" name="/vehicle_avoidance/vehicle_detection_node_launchfile"
-             value="$(find tof_vehicle_detection)/launch/tof_vehicle_detection_node.launch"/>
-        <arg unless="$(arg tof)" name="/vehicle_avoidance/vehicle_detection_node_launchfile"
+        <!--arg if="$(arg tof)" name="/vehicle_avoidance/vehicle_detection_node_launchfile"
+             value="$(find tof_vehicle_detection)/launch/tof_vehicle_detection_node.launch"/-->
+        <arg name="/vehicle_avoidance/vehicle_detection_node_launchfile"
              value="$(find vehicle_detection)/launch/vehicle_detection_node.launch"/>
+
+        <arg if="$(arg tof)" name="/vehicle_avoidance/vehicle_avoidance_control_node_launchfile"
+             default="$(find tof_vehicle_detection)/launch/tof_vehicle_avoidance_control_node.launch" />
+        <arg unless="$(arg tof)" name="/vehicle_avoidance/vehicle_avoidance_control_node_launchfile"
+             default="$(find vehicle_detection)/launch/vehicle_avoidance_control_node.launch" />
 
 
     </include>
