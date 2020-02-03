@@ -17,8 +17,7 @@ class lane_controller(object):
         self.lane_reading = None
         self.last_ms = None
         self.pub_counter = 0
-
-
+        self.outputs = [0] * 3
         self.velocity_to_m_per_s = 0.67
         self.omega_to_rad_per_s = 0.45 * 2 * math.pi
 
@@ -85,7 +84,7 @@ class lane_controller(object):
         self.d_int = 0.
         #in param file: self.q_u = np.array([[100., 0, 0], [0, 2., 0], [0, 0, 120.]])
         #in param file: self.Norm = np.array([[0.0083,0,0],[0,0.0083,0],[0,0,0.0083]])
-        print((self.q_u,self.Norm))
+        #print((self.q_u,self.Norm))
         self.q = self.q_u*self.Norm
         #in param file: self.r = np.array([10])
         #in param file: self.lqr_gain = 0.8
@@ -185,7 +184,7 @@ class lane_controller(object):
         self.k_Dd = self.setupParameter("~k_Dd", k_Dd_fallback)
         self.k_Dphi = self.setupParameter("~k_Dphi", k_Dphi_fallback)
 
-        print(q_u_fallback)
+        #print(q_u_fallback)
         #Parameters for LQRI control
         self.q_u = np.reshape(np.array(self.setupParameter("~q_u", q_u_fallback_list)), q_u_fallback.shape)
         self.Norm = np.reshape(np.array(self.setupParameter("~Norm", Norm_fallback_list)), Norm_fallback.shape)
@@ -476,7 +475,7 @@ class lane_controller(object):
         filtered_heading_err = (self.heading_err+self.prev_heading_err+self.prev_prev_heading_err+self.ppp_heading_err+self.pppp_heading_err)/5
 
         v, omega = self.lqr(self.cross_track_err, self.heading_err, pose_msg.d_ref, pose_msg.phi_ref, pose_msg.v_ref, image_delay, dt)
-        print (v, omega)
+        #print (v, omega)
 
         car_control_msg = Twist2DStamped()
         car_control_msg.header = pose_msg.header
@@ -548,6 +547,9 @@ class lane_controller(object):
         #car_control_msg.omega = omega * self.omega_to_rad_per_s
 
         #omega = car_control_msg.omega
+        self.outputs.append(omega)
+        del self.outputs[0]
+        omega = sum(self.outputs) / len(self.outputs)
         if omega > self.omega_max: omega = self.omega_max
         if omega < self.omega_min: omega = self.omega_min
         #omega += self.omega_ff

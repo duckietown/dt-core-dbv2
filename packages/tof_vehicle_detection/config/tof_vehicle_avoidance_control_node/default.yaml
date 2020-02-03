@@ -4,7 +4,12 @@ detection_max_distance: 0.6
 
 distance_avg: 5
 
+omega_min: 0.0
+omega_max: 2.0
+
 Kp: 1.0
 Ki: 0.0
 Kd: 0.5
 Kp_delta_v: 0.8
+
+max_speed: 0.6
