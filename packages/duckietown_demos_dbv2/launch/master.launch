@@ -67,6 +67,7 @@
 <arg name="/vehicle_avoidance/filter" default="true" />
 <arg name="/vehicle_avoidance/control" default="true"/>
 <arg name="/vehicle_avoidance/vehicle_detection_node_launchfile" default="$(find vehicle_detection)/launch/vehicle_detection_node.launch" />
+<arg name="/vehicle_avoidance/vehicle_avoidance_control_node_launchfile" default="$(find vehicle_detection)/launch/vehicle_avoidance_control_node.launch" />
 
 <arg name="apriltags" default="false"/>
 
@@ -384,7 +385,7 @@
 		<remap from="vehicle_avoidance_control_node/detection" to="vehicle_detection_node/detection"/>
 		<remap from="vehicle_avoidance_control_node/vehicle_pose" to="vehicle_filter_node/pose"/>
 		<remap from="vehicle_avoidance_control_node/car_cmd_in" to="lane_controller_node/car_cmd"/>
-		<include file="$(find vehicle_detection)/launch/vehicle_avoidance_control_node.launch" >
+		<include file="$(arg /vehicle_avoidance/vehicle_avoidance_control_node_launchfile)" >
 
 
 			<arg name="veh" value="$(arg veh)"/>
